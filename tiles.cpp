@@ -1,10 +1,13 @@
 #include "tiles.h"
 
+#ifndef TILES_H
+#define TILES_H
+
 // Default constructor
 Tile::Tile()
 {	
-	width = 10;
-	length = 10;
+	width = 15;
+	length = 15;
 	visited = false;
 	wall = true;
 }
@@ -57,3 +60,4 @@ void Tile::draw(int x, int y)
 	}
 }
 
+#endif
