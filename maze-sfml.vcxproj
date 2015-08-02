@@ -72,12 +72,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="grid.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="maze.cpp" />
+    <ClCompile Include="maze_ascii.cpp" />
     <ClCompile Include="tiles.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="maze.h" />
+    <ClInclude Include="grid.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="maze_ascii.h" />
     <ClInclude Include="tiles.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

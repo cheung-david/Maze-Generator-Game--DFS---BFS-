@@ -1,7 +1,10 @@
+// Maze Generator - Tiles
+// By David Cheung
+// Class that consists of the properties of a single maze tile.
+
 #include "tiles.h"
 
-#ifndef TILES_H
-#define TILES_H
+
 
 // Default constructor
 Tile::Tile()
@@ -35,6 +38,46 @@ void Tile::setVisited(bool state)
 	visited = state;
 }
 
+void Tile::setX(int newX)
+{
+	x = newX;
+}
+
+void Tile::setY(int newY)
+{
+	y = newY;
+}
+
+void Tile::setVal(int newVal)
+{
+	value = newVal;
+}
+
+void Tile::setWidth(int newWidth)
+{
+	width = newWidth;
+}
+
+int Tile::getX()
+{
+	return x;
+}
+
+int Tile::getY()
+{
+	return y;
+}
+
+int Tile::getVal()
+{ 
+	return value; 
+}
+
+int Tile::getWidth()
+{
+	return width;
+}
+
 bool Tile::isWall()
 {
 	return wall;
@@ -45,19 +88,6 @@ bool Tile::isVisited()
 	return visited;
 }
 
-void Tile::draw(int x, int y)
-{
-	sf::RectangleShape tile(sf::Vector2f(width, length));
-	if (isWall())
-	{
-		tile.setFillColor(sf::Color(255, 255, 255));
-		tile.setPosition(x, y);
-	}
-	else
-	{
-		tile.setFillColor(sf::Color(0, 0, 0));
-		tile.setPosition(x, y);
-	}
-}
 
-#endif
+
+
