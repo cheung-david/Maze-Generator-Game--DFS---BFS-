@@ -10,11 +10,21 @@ Grid::Grid()
 }
 
 
-Tile Grid::getTile(int row, int col)
+Tile* Grid::getTile(int row, int col)
 {
-	return gridTiles[row][col];
+	return &gridTiles[row][col];
 }
 
+void Grid::setStartPos(int& x, int& y)
+{
+	startPos.x = x;
+	startPos.y = y;
+}
+
+COORD Grid::getStartPos()
+{
+	return startPos;
+}
 
 void Grid::initialize()
 {
@@ -25,6 +35,7 @@ void Grid::initialize()
 			gridTiles[row][col].setWall(true);
 			gridTiles[row][col].setVisited(false);
 			gridTiles[row][col].setWidth(15);
+			gridTiles[row][col].setVal(0);
 
 		}
 	}

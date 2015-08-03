@@ -17,9 +17,13 @@ public:
 
 	void initialize();
 
-	bool getStartPos(int &x, int &y);
+	COORD getStartPos();
 
-	bool getExitPos(int &x, int &y);
+	COORD getExitPos();
+
+	void setStartPos(int &x, int &y);
+
+	void setExitPos(int &x, int &y);
 
 	void findSolution();
 
@@ -31,12 +35,13 @@ public:
 	void drawSolution();
 	void setSolidMaze();
 
-	Tile getTile(int row, int col);
+	Tile* getTile(int row, int col);
 
 private:
 	Tile gridTiles[HEIGHT][WIDTH];
 	bool exitFound;
-
+	COORD startPos;
+	COORD endPos;
 	std::stack<COORD> solutionPath;
 
 

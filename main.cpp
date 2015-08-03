@@ -9,9 +9,9 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(500, 500), "Maze Game");
-	sf::RectangleShape player(sf::Vector2f(10, 10));
-	player.setFillColor(sf::Color::Red);
+	sf::RenderWindow window(sf::VideoMode(850, 550), "Maze Game");
+	sf::RectangleShape player(sf::Vector2f(15, 15));
+	player.setFillColor(sf::Color::Blue);
 	Grid maze;
 
 	// Initialize screen buffer
@@ -23,27 +23,32 @@ int main()
 	// Set tile-grid coordinates
 	maze.setSolidMaze();
 
+	drawSolidMaze(maze);
+
 	// Load tiles onto screen buffer
 	for (int row = 0; row < HEIGHT; row++)
 	{
 		for (int column = 0; column < WIDTH; column++)
 		{
-			buffer[row * WIDTH + column].setSize(sf::Vector2f(maze.getTile(row, column).getWidth(), maze.getTile(row, column).getWidth()));
-			if (maze.getTile(row, column).isWall())
+			buffer[row * WIDTH + column].setSize(sf::Vector2f(maze.getTile(row, column)->getWidth(), maze.getTile(row, column)->getWidth()));
+			//std::cout << maze.getTile(row, column)->isWall() << " ";
+			if (maze.getTile(row, column)->isWall())
 			{
 				buffer[row * WIDTH + column].setFillColor(sf::Color(255, 255, 255));
-				buffer[row * WIDTH + column].setPosition(maze.getTile(row, column).getX(), maze.getTile(row, column).getY());
+				buffer[row * WIDTH + column].setPosition(maze.getTile(row, column)->getX(), maze.getTile(row, column)->getY());
 				window.draw(buffer[row * WIDTH + column]);
 			}
 			else
 			{
-				buffer[row * WIDTH + column].setFillColor(sf::Color(255, 0, 0));
-				buffer[row * WIDTH + column].setPosition(maze.getTile(row, column).getX(), maze.getTile(row, column).getY());
+				buffer[row * WIDTH + column].setFillColor(sf::Color(0, 0, 0));
+				buffer[row * WIDTH + column].setPosition(maze.getTile(row, column)->getX(), maze.getTile(row, column)->getY());
 				window.draw(buffer[row * WIDTH + column]);
 			}
 		}
 	}
-
+	
+	player.setPosition(maze.getTile(maze.getStartPos().x, maze.getStartPos().y)->getX() , maze.getTile(maze.getStartPos().x, maze.getStartPos().y)->getY());
+	
 	// Main game loop
 	while (window.isOpen())
 	{
@@ -63,8 +68,7 @@ int main()
 			{
 				window.draw(buffer[row * WIDTH + column]);
 			}
-		}
-
+		}	
 			window.draw(player);
 			window.display();
 

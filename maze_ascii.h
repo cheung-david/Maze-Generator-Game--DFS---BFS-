@@ -4,8 +4,8 @@
 // Uses breadth first search to find the shortest path from the start of the maze
 // to the end destination.
 
-#ifndef MAZE_H
-#define MAZE_H
+#ifndef MAZE_ASCII_H
+#define MAZE_ASCII_H
 
 #include <iostream>
 #include <stdlib.h>

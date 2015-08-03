@@ -8,6 +8,7 @@
 #include <iostream>
 #include "tiles.h"
 #include "maze_ascii.h"
+#include "maze_sfml.h"
 #include "grid.h"
 
 
