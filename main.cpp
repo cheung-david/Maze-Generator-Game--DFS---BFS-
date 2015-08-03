@@ -12,10 +12,13 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(850, 550), "Maze Game");
 	//sf::RectangleShape player(sf::Vector2f(15, 15));
 	sf::CircleShape player(7.5);
+
 	player.setFillColor(sf::Color::Cyan);
 	Grid maze;
+
 	bool exitPlaced = false;
 	bool startPlaced = false;
+	bool solutionPlaced = false;
 
 	// Initialize screen buffer
 	std::vector<sf::RectangleShape> buffer(HEIGHT * WIDTH);
@@ -50,21 +53,23 @@ int main()
 				{
 					startPlaced = true;
 					buffer[row * WIDTH + column].setFillColor(sf::Color(255, 0, 0));
-					maze.setStartPos(row, column);
+					maze.setStartPos(column, row);
 				}
 
 				if ((HEIGHT - row) < 3 && (WIDTH - column) < 5 && exitPlaced == false)
 				{
 					exitPlaced = true;
 					buffer[row * WIDTH + column].setFillColor(sf::Color(0, 255, 0));
-					maze.setExitPos(row, column);
+					maze.setExitPos(column, row);
 				}
 				window.draw(buffer[row * WIDTH + column]);
 			}
 		}
 	}
+
 	maze.setPlayerPos(maze.getStartPos().x, maze.getStartPos().y);
 	player.setPosition(maze.getTile(maze.getStartPos().y, maze.getStartPos().x)->getX() , maze.getTile(maze.getStartPos().y, maze.getStartPos().x)->getY());
+	
 	
 	// Main game loop
 	while (window.isOpen())
@@ -79,14 +84,6 @@ int main()
 
 		window.clear();
 
-		// Load screen buffer
-		for (int row = 0; row < HEIGHT; row++)
-		{
-			for (int column = 0; column < WIDTH; column++)
-			{
-				window.draw(buffer[row * WIDTH + column]);
-			}
-		}	
 
 		// Player movement - keyboard function
 		// left key is pressed: move our character
@@ -124,6 +121,80 @@ int main()
 				maze.setPlayerPos(maze.getPlayerPos().x, maze.getPlayerPos().y + 1);
 				player.setPosition(maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getX(), maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getY());
 				//std::cout << maze.getPlayerPos().x << " " << maze.getPlayerPos().y << std::endl;
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+		{
+			/* Test 
+			std::cout << maze.findSolution() << std::endl;
+			std::cout << maze.getExitPos().x << " " << maze.getExitPos().y << std::endl;
+			*/
+
+			// Find solution - breadth first search
+			maze.findSolution();
+
+			std::stack<COORD> solution = maze.returnSolution();
+			int n = solution.size() - 1;
+			
+			// Remove starting trace for solution
+			if (!solution.empty())
+			{
+				solution.pop();
+			}
+
+			// Display Solution
+			for (int i = 1; i < n; i++)
+			{
+				int solX = solution.top().x;
+				int solY = solution.top().y;
+				
+				// Toggle solution
+				if (solutionPlaced == false) // Show solution
+				{ 	
+					buffer[solY * WIDTH + solX].setFillColor(sf::Color(190, 0, 0));
+				}
+				else // Remove solution
+				{
+					buffer[solY * WIDTH + solX].setFillColor(sf::Color(0, 0, 0));
+				}
+
+				window.draw(buffer[solY * WIDTH + solX]);
+				solution.pop();
+			}
+
+			if (solutionPlaced == false)
+			{ 
+				solutionPlaced = true;
+			}
+			else
+			{
+				solutionPlaced = false;
+			}
+
+			buffer[maze.getExitPos().y * WIDTH + maze.getExitPos().x].setFillColor(sf::Color(0, 255, 0));
+			buffer[maze.getStartPos().y * WIDTH + maze.getStartPos().x].setFillColor(sf::Color(255, 0, 0));
+
+			// Remove ending trace for solution
+			while (!solution.empty())
+			{
+				solution.pop();
+			}
+			
+			maze.initialize();
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			main();
+			window.close();
+		}
+
+		// Load screen buffer
+		for (int row = 0; row < HEIGHT; row++)
+		{
+			for (int column = 0; column < WIDTH; column++)
+			{
+				window.draw(buffer[row * WIDTH + column]);
 			}
 		}
 

@@ -125,7 +125,7 @@ void drawSolidMaze(Grid& maze)
 	//maze.getTile(row, column)->setVal(8);
 	maze.getTile(row, column)->setWall(false);
 	maze.setStartPos(row, column);
-	cout << maze.getTile(row, column)->isWall() << endl;
+	//cout << maze.getTile(row, column)->isWall() << endl;
 	
 	
 	createSolidMaze(maze, row, column);

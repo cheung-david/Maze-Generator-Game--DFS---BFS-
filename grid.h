@@ -6,6 +6,7 @@
 #define GRID_H
 
 #include <stack>
+#include <queue>
 #include "tiles.h"
 #include "maze_ascii.h"
 
@@ -13,9 +14,12 @@
 class Grid
 {
 public:
+	// Constructor
 	Grid();
 
 	void initialize();
+
+	// Setters/getters
 
 	COORD getStartPos();
 
@@ -29,14 +33,17 @@ public:
 
 	void setPlayerPos(int x, int y);
 
-	void findSolution();
+	bool findSolution();
 
-	bool isOpen(int x, int y);
+	bool isOpen(Tile tile);
 
-	bool isAdjacent;
+	bool isAdjacent(int curX, int curY, int targetX, int targetY);
 
 	void drawTiles();
-	void drawSolution();
+
+	std::stack<COORD> Grid::returnSolution();
+
+	// Set tiles of corresponding width on the grid
 	void setSolidMaze();
 
 	Tile* getTile(int row, int col);

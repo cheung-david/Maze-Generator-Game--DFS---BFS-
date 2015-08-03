@@ -14,8 +14,5 @@
 #include <thread>
 
 
-
-
 // Main game loop
-
 int main();
