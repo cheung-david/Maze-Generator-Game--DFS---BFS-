@@ -10,6 +10,10 @@
 #include "maze_ascii.h"
 #include "maze_sfml.h"
 #include "grid.h"
+#include <chrono>
+#include <thread>
+
+
 
 
 // Main game loop

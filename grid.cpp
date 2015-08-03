@@ -27,6 +27,12 @@ void Grid::setExitPos(int& x, int& y)
 	endPos.y = y;
 }
 
+void Grid::setPlayerPos(int x, int y)
+{
+	playerPos.x = x;
+	playerPos.y = y;
+}
+
 COORD Grid::getStartPos()
 {
 	return startPos;
@@ -35,6 +41,11 @@ COORD Grid::getStartPos()
 COORD Grid::getExitPos()
 {
 	return endPos;
+}
+
+COORD Grid::getPlayerPos()
+{
+	return playerPos;
 }
 
 void Grid::initialize()
@@ -62,9 +73,10 @@ void Grid::setSolidMaze()
 	{
 		for (int column = 0; column < WIDTH; column++)
 		{
-			colPos += gridTiles[row][column].getWidth();
+			
 			gridTiles[row][column].setY(rowPos);
 			gridTiles[row][column].setX(colPos);
+			colPos += gridTiles[row][column].getWidth();
 			//gridTiles[row][column].draw();
 			
 		}

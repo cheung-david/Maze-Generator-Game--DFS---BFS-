@@ -10,8 +10,9 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(850, 550), "Maze Game");
-	sf::RectangleShape player(sf::Vector2f(15, 15));
-	player.setFillColor(sf::Color::Red);
+	//sf::RectangleShape player(sf::Vector2f(15, 15));
+	sf::CircleShape player(7.5);
+	player.setFillColor(sf::Color::Cyan);
 	Grid maze;
 	bool exitPlaced = false;
 	bool startPlaced = false;
@@ -62,8 +63,8 @@ int main()
 			}
 		}
 	}
-	
-	player.setPosition(maze.getTile(maze.getStartPos().x, maze.getStartPos().y)->getX() , maze.getTile(maze.getStartPos().x, maze.getStartPos().y)->getY());
+	maze.setPlayerPos(maze.getStartPos().x, maze.getStartPos().y);
+	player.setPosition(maze.getTile(maze.getStartPos().y, maze.getStartPos().x)->getX() , maze.getTile(maze.getStartPos().y, maze.getStartPos().x)->getY());
 	
 	// Main game loop
 	while (window.isOpen())
@@ -78,6 +79,7 @@ int main()
 
 		window.clear();
 
+		// Load screen buffer
 		for (int row = 0; row < HEIGHT; row++)
 		{
 			for (int column = 0; column < WIDTH; column++)
@@ -85,6 +87,47 @@ int main()
 				window.draw(buffer[row * WIDTH + column]);
 			}
 		}	
+
+		// Player movement - keyboard function
+		// left key is pressed: move our character
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			if ((maze.getPlayerPos().x - 1) > 0 && maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x - 1)->isWall() == false)
+			{
+				maze.setPlayerPos(maze.getPlayerPos().x - 1, maze.getPlayerPos().y);
+				player.setPosition(maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getX(), maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getY());
+				//std::cout << maze.getPlayerPos().x << " " << maze.getPlayerPos().y << std::endl;
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{ 
+			if ((maze.getPlayerPos().x + 1) < WIDTH && maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x + 1)->isWall() == false)
+			{
+				maze.setPlayerPos(maze.getPlayerPos().x + 1, maze.getPlayerPos().y);
+				player.setPosition(maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getX(), maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getY());
+				//std::cout << maze.getPlayerPos().x << " " << maze.getPlayerPos().y << std::endl;
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		{
+			if ((maze.getPlayerPos().y - 1) > 0 && maze.getTile(maze.getPlayerPos().y - 1, maze.getPlayerPos().x)->isWall() == false)
+			{
+				maze.setPlayerPos(maze.getPlayerPos().x, maze.getPlayerPos().y - 1);
+				player.setPosition(maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getX(), maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getY());
+				//std::cout << maze.getPlayerPos().x << " " << maze.getPlayerPos().y << std::endl;
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			if ((maze.getPlayerPos().y + 1) < HEIGHT && maze.getTile(maze.getPlayerPos().y + 1, maze.getPlayerPos().x)->isWall() == false)
+			{
+				maze.setPlayerPos(maze.getPlayerPos().x, maze.getPlayerPos().y + 1);
+				player.setPosition(maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getX(), maze.getTile(maze.getPlayerPos().y, maze.getPlayerPos().x)->getY());
+				//std::cout << maze.getPlayerPos().x << " " << maze.getPlayerPos().y << std::endl;
+			}
+		}
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 			window.draw(player);
 			window.display();
 

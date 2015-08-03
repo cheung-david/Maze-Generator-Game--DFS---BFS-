@@ -21,9 +21,13 @@ public:
 
 	COORD getExitPos();
 
+	COORD getPlayerPos();
+
 	void setStartPos(int &x, int &y);
 
 	void setExitPos(int &x, int &y);
+
+	void setPlayerPos(int x, int y);
 
 	void findSolution();
 
@@ -42,6 +46,8 @@ private:
 	bool exitFound;
 	COORD startPos;
 	COORD endPos;
+	COORD playerPos;
+
 	std::stack<COORD> solutionPath;
 
 
