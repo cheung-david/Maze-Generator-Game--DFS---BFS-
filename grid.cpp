@@ -21,9 +21,20 @@ void Grid::setStartPos(int& x, int& y)
 	startPos.y = y;
 }
 
+void Grid::setExitPos(int& x, int& y)
+{
+	endPos.x = x;
+	endPos.y = y;
+}
+
 COORD Grid::getStartPos()
 {
 	return startPos;
+}
+
+COORD Grid::getExitPos()
+{
+	return endPos;
 }
 
 void Grid::initialize()

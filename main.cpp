@@ -11,8 +11,10 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(850, 550), "Maze Game");
 	sf::RectangleShape player(sf::Vector2f(15, 15));
-	player.setFillColor(sf::Color::Blue);
+	player.setFillColor(sf::Color::Red);
 	Grid maze;
+	bool exitPlaced = false;
+	bool startPlaced = false;
 
 	// Initialize screen buffer
 	std::vector<sf::RectangleShape> buffer(HEIGHT * WIDTH);
@@ -42,6 +44,20 @@ int main()
 			{
 				buffer[row * WIDTH + column].setFillColor(sf::Color(0, 0, 0));
 				buffer[row * WIDTH + column].setPosition(maze.getTile(row, column)->getX(), maze.getTile(row, column)->getY());
+
+				if (startPlaced == false)
+				{
+					startPlaced = true;
+					buffer[row * WIDTH + column].setFillColor(sf::Color(255, 0, 0));
+					maze.setStartPos(row, column);
+				}
+
+				if ((HEIGHT - row) < 3 && (WIDTH - column) < 5 && exitPlaced == false)
+				{
+					exitPlaced = true;
+					buffer[row * WIDTH + column].setFillColor(sf::Color(0, 255, 0));
+					maze.setExitPos(row, column);
+				}
 				window.draw(buffer[row * WIDTH + column]);
 			}
 		}

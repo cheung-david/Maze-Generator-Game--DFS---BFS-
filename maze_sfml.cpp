@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool exitPlaced2 = false;
+
 
 void neighborsSF(Grid& maze, SFCOORD curTile, vector<int>& moves)
 {
@@ -97,12 +97,6 @@ void createSolidMaze(Grid& maze, int row, int column)
 		}
 		else
 		{
-			if (exitPlaced2 == false)
-			{
-				exitPlaced2 = true;
-				maze.getTile(curTile.y, curTile.x)->setVal(9);
-			}
-
 			curTile = tileList.top();
 			tileList.pop();
 		}
@@ -128,7 +122,7 @@ void drawSolidMaze(Grid& maze)
 	}
 
 	// Starting point
-	maze.getTile(row, column)->setVal(8);
+	//maze.getTile(row, column)->setVal(8);
 	maze.getTile(row, column)->setWall(false);
 	maze.setStartPos(row, column);
 	cout << maze.getTile(row, column)->isWall() << endl;
