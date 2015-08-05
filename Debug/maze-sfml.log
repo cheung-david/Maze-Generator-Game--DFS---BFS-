@@ -1,0 +1,27 @@
+﻿Build started 03/08/2015 10:30:23 PM.
+     1>Project "C:\Users\David\Documents\Visual Studio 2013\Projects\sfml\maze-sfml\maze-sfml.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (sfml.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>ClCompile:
+         E:\Visual Studio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(41): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(46): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(52): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(73): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(177): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(186): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(195): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(204): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\david\documents\visual studio 2013\projects\sfml\maze-sfml\main.cpp(282): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+       Link:
+         E:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\David\Documents\Visual Studio 2013\Projects\sfml\maze-sfml\Debug\maze-sfml.exe" /INCREMENTAL /NOLOGO "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-main-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\David\Documents\Visual Studio 2013\Projects\sfml\maze-sfml\Debug\maze-sfml.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\David\Documents\Visual Studio 2013\Projects\sfml\maze-sfml\Debug\maze-sfml.lib" /MACHINE:X86 Debug\grid.obj
+         Debug\main.obj
+         Debug\maze_ascii.obj
+         Debug\maze_sfml.obj
+         Debug\tiles.obj
+         maze-sfml.vcxproj -> C:\Users\David\Documents\Visual Studio 2013\Projects\sfml\maze-sfml\Debug\maze-sfml.exe
+     1>Done Building Project "C:\Users\David\Documents\Visual Studio 2013\Projects\sfml\maze-sfml\maze-sfml.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.30
